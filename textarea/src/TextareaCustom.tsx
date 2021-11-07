@@ -1,33 +1,35 @@
 import { useState } from "react";
 import CSS from 'csstype';
 
-
 const TextareaCustom = () => {
-   
-    const [input, setInput] = useState<any>([]);
 
+const [experiment, setExperiment] = useState<any[]>([])
 
-    const handleChange = (e: any) => {       
-        e.currentTarget.textContent = input;        
-    };
-
-    const handleInput = (e: any) => {
-
-        const afterLineBreak = <div style={afterLineBreakElementStyle}>.</div>;
-
-        let newText = e.currentTarget.textContent; 
-        
-                  if ( e.currentTarget.textContent.length !== 0 && e.currentTarget.textContent.length % 10 === 0) {
-                      console.log("match!");         
-            };
+const handleChange = (evt: any) => {  
     
-        setInput(newText);
-    };
-   
+    const contentEdit = require('content-edit');    
 
-    return <div style={textareaStyle}  contentEditable="true" suppressContentEditableWarning={true} onBlur={handleChange}
-     onInput={handleInput}>
-       
+const el = document.getElementById("textarea");
+              
+                    setExperiment(evt.currentTarget.innerHTML)
+             if ( evt.currentTarget.textContent.length !== 0 && evt.currentTarget.textContent.length % 5 === 0) {
+                    const afterLineBreak: any = <div style={afterLineBreakElementStyle}>.</div>;
+                 
+                      console.log("match!");  
+                      let newArr: any[] = [evt.currentTarget.textContent];
+                      newArr.push(afterLineBreak);                      
+                      contentEdit.placeCaretAtEnd(el);
+                      setExperiment(newArr)                  
+                      console.log(experiment);  
+            };  
+
+// setExperiment(evt.currentTarget.innerHTML);
+contentEdit.placeCaretAtEnd(el);
+}; 
+
+    return <div id="textarea" style={textareaStyle}  contentEditable="true" suppressContentEditableWarning={true} 
+     onInput={handleChange}> 
+       {experiment}
     </div>
 };
 
@@ -48,4 +50,4 @@ const afterLineBreakElementStyle: CSS.Properties = {
     height: '30px',
     backgroundColor: 'gold',
     borderRadius: '50%'
-}
+};

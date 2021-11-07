@@ -1,13 +1,17 @@
 import './App.css';
 import TextareaCustom from './TextareaCustom';
+import {  RecoilRoot } from 'recoil';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-       <TextareaCustom />
-      </header>
-    </div>
+    <RecoilRoot>
+      <div className="App">
+        <header className="App-header">
+        <TextareaCustom />
+        </header>
+      </div>
+    </RecoilRoot>
+   
   );
 }
 
